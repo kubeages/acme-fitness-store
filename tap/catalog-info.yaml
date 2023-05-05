@@ -98,8 +98,3 @@ spec:
   lifecycle: production
   owner: epic-dev-team
   system: fitness-store
-  dependsOn:
-    - component: acme-catalog
-    - component: acme-cart
-    - component: acme-order
-    - component: acme-identity
