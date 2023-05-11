@@ -26,6 +26,6 @@ spec:
   dnsNames:
     -  #@ 'acme-fitness.' + data.values.appDomainName
   issuerRef:
-    name: letsencrypt-prod
+    name: letsencrypt-acme-prod
     kind: ClusterIssuer
   secretName: acme-fitness-cert
