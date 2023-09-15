@@ -36,7 +36,7 @@ metadata:
 spec:
   tls:
     issuerRef:
-      name: letsencrypt-acme-prod
+      name: letsencrypt-prod 
       kind: ClusterIssuer
   tokenSignature:
     signAndVerifyKeyRef:

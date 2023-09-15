@@ -10,7 +10,7 @@ spec:
   acme:
     email: #@ data.values.email
     privateKeySecretRef:
-      name: letsencrypt-prod
+      name: letsencrypt-acme-prod
     server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
     - http01:         

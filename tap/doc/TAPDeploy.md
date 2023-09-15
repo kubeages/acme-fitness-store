@@ -49,7 +49,7 @@ kubectl apply -f testingPipeline.yaml -n <workloadNamespace>
 For example:
 
 ```
-kubectl apply -f testingPipeline.yaml -n workloads
+kubectl apply -f testingPipeline.yaml -n demo-tap-acmefitness
 ```
 
 ### Let's Encrypt CA Issuer
@@ -88,7 +88,7 @@ ytt -f appSSOInstance.yaml -v workloadNamespace=<workloadNamespace> -v devDefaul
 For example:
 
 ```
-ytt -f appSSOInstance.yaml -v workloadNamespace=workloads -v devDefaultAccountUsername=acme -v devDefaultAccountPassword=fitness | kubectl apply -f-
+ytt -f appSSOInstance.yaml -v workloadNamespace=demo-tap-acmefitness -v devDefaultAccountUsername=acme -v devDefaultAccountPassword=fitness | kubectl apply -f-
 ```
 
 Next, create a ClientRegistration resource by running the following command and replacing these placeholders:
@@ -103,7 +103,7 @@ ytt -f clientRegistrationResourceClaim.yaml.yaml -v workloadNamespace=<workloadN
 For example:
 
 ```
-ytt -f clientRegistrationResourceClaim.yaml -v workloadNamespace=workloads -v appSSORedirectURI=acme-fitness.perfect300rock.com/login/oauth2/code/sso | kubectl apply -f-
+ytt -f clientRegistrationResourceClaim.yaml -v workloadNamespace=demo-tap-acmefitness -v appSSORedirectURI=acme-fitness.demo-tap-acmefitness.tap.kubeagesaz.com/login/oauth2/code/sso | kubectl apply -f-
 ```
 
 Next, obtain the appSSO issuerURI by running the following command replacing <workloadNamespace> with the name of the namespace where the application will be deployed:
@@ -128,18 +128,12 @@ ytt -f redis.yaml -v workloadNamespace=<workloadNamespace> -v redisPassword=<red
 For example:
 
 ```
-ytt -f redis.yaml -v workloadNamespace=workloads -v redisPassword=fitness | kubectl apply -f-
+ytt -f redis.yaml -v workloadNamespace=demo-tap-acmefitness -v redisPassword=fitness | kubectl apply -f-
 ```
 
 ### Spring Cloud Gateway Setup
 
-First, install the repository that contains the Spring Cloud Gateway package by running the following command:
-
-```
-tanzu package repository add scg-package-repository --namespace tap-install --url registry.tanzu.vmware.com/spring-cloud-gateway-for-kubernetes/scg-package-repository:2.0.0 
-```
-
-Get the version ot the package by running the following command:
+First, get the version of the Spring Cloud Gateway package by running the following command:
 
 ```
 tanzu package available list -n tap-install | grep spring-cloud-gateway
@@ -148,7 +142,7 @@ tanzu package available list -n tap-install | grep spring-cloud-gateway
 Then, install the Spring Cloud Gateway package by running the following command:
 
 ```
-tanzu package install spring-cloud-gateway --namespace tap-install --package-name spring-cloud-gateway.tanzu.vmware.com --version 2.0.0
+tanzu package install spring-cloud-gateway --namespace tap-install --package-name spring-cloud-gateway.tanzu.vmware.com --version 2.0.6
 ```
 
 
@@ -168,9 +162,9 @@ ytt -f scgRoutes.yaml -v workloadNamespace=<workloadNamespace>
 For example:
 
 ```
-ytt -f scgInstance.yaml -v workloadNamespace=workloads | kubectl apply -f-
+ytt -f scgInstance.yaml -v workloadNamespace=demo-tap-acmefitness | kubectl apply -f-
 
-ytt -f scgRoutes.yaml -v workloadNamespace=workloads | kubectl apply -f-
+ytt -f scgRoutes.yaml -v workloadNamespace=demo-tap-acmefitness | kubectl apply -f-
 ```
 
 ### PostgreSQL Deployment
@@ -234,7 +228,7 @@ ytt -f workloads.yaml -v workloadNamespace=<workloadNamespace> -v appSSOIssuerUR
 For example:
 
 ```
-ytt -f workloads.yaml -v workloadNamespace=workloads -v appSSOIssuerURI=https://appsso-acme-fitness.workloads.perfect300rock.com  -v appDomainName=perfect300rock.com -v sourceRepo=https://github.com/gm2552-commercial/acme-fitness-store -v sourceRepoBranch=Azure  | kubectl apply -f-
+ytt -f workloads.yaml -v workloadNamespace=demo-tap-acmefitness -v appSSOIssuerURI=https://appsso-acme-fitness.demo-tap-acmefitness.tap.kubeagesaz.com  -v appDomainName=tap.kubeagesaz.com -v sourceRepo=https://github.com/kubeages/acme-fitness-store -v sourceRepoBranch=Azure  | kubectl apply -f-
 ```
 
 ### Ingress Deployment
@@ -249,7 +243,7 @@ ytt -f ingress.yaml -v workloadNamespace=<workloadNamespace> -v appDomainName=<a
 For example:
 
 ```
-ytt -f ingress.yaml -v workloadNamespace=workloads -v appDomainName=perfect300rock.com | kubectl apply -f-
+ytt -f ingress.yaml -v workloadNamespace=demo-tap-acmefitness -v appDomainName=tap.kubeagesaz.com | kubectl apply -f-
 ```
 
 ## Application Catalog
