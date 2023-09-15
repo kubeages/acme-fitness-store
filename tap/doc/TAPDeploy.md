@@ -142,7 +142,7 @@ tanzu package available list -n tap-install | grep spring-cloud-gateway
 Then, install the Spring Cloud Gateway package by running the following command:
 
 ```
-tanzu package install spring-cloud-gateway --namespace tap-install --package-name spring-cloud-gateway.tanzu.vmware.com --version 2.0.6
+tanzu package install spring-cloud-gateway --namespace tap-install --package spring-cloud-gateway.tanzu.vmware.com --version 2.0.6
 ```
 
 
