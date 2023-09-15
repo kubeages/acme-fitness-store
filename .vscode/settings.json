@@ -1,1 +1,5 @@
-{}
+{
+    "java.server.launchMode": "Standard",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "tanzu-app-accelerator.tanzuApplicationPlatformGuiUrl": "https://tap-gui.tap.kubeagesaz.com/"
+}
